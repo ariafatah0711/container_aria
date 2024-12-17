@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-rs2
+spec:
+  replicas: 3
+  selector:
+    # matchLabels:
+    #   label-key1: label-value1
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - nginx
+          - apache2
+      - key: env
+        operator: In
+        values:
+          - dev
+          - prod
+          - qa
+  template:
+    metadata:
+      name: nginx-rs2
+      labels:
+        app: nginx
+        env: prod
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80

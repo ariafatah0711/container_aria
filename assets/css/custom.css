@@ -1,0 +1,107 @@
+/* custom css */
+/* .inner {
+    width: 1000px !important;
+} */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    text-decoration: none;
+    /* border: none; */
+    list-style-type: none;
+}
+
+/* summary */
+summary,
+summary::-webkit-details-marker {
+    cursor: pointer;
+    list-style: none;
+}
+
+details ul,
+details ol {
+    list-style: none !important;
+    padding-left: 2em !important;
+}
+
+details ul,
+details li {
+    margin: 0;
+    padding-left: 1px;
+}
+
+details>summary::before {
+    content: "▶️ ";
+}
+
+details[open]>summary::before {
+    content: "🔽 ";
+}
+
+/* ul li */
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+}
+
+li,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+span,
+a {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+li {
+    line-height: 1.4;
+    margin: 0;
+    padding: 0;
+    /* list-style: none; */
+}
+
+li li {
+    list-style-type: none !important;
+    list-style: none !important;
+}
+
+
+/* border */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    /* Gabungkan border agar rapi */
+    margin: 20px 0;
+    /* Tambahkan margin jika perlu */
+}
+
+th,
+td {
+    border: 1px solid #000;
+    /* Warna border hitam */
+    padding: 8px;
+    /* Berikan padding agar teks tidak terlalu mepet */
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    /* Warna latar belakang header tabel */
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+    /* Alternating row color untuk estetika */
+}

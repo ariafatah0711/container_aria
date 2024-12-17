@@ -1,0 +1,15 @@
+plugins:
+  - jekyll-relative-links
+relative_links:
+  enabled: true
+  collections: true
+
+exclude:
+  - README.md
+
+include:
+  - "*.md"
+
+theme: jekyll-theme-tactile
+
+repo: "container_aria"
