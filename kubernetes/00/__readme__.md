@@ -122,12 +122,30 @@ nginx-service   NodePort    10.111.219.184   <none>        80:30001/TCP   5m9s
 curl 192.168.49.2:30001
 ```
 
-# ...
+# deployment
 ```bash
 kubectl apply -f namafile.yaml
 kubectl get deployments
 kubectl describe deployment <name_deployment>
 kubectl delete deployment <name_deployment>
+
+kubectl rollout history <object> <name>
+kubectl rollout pause <object> <name>
+kubectl rollout resume <object> <name>
+kubectl rollout restart <object> <name> 
+kubectl rollout status <object> <name>
+kubectl rollout undo <object> <name>
+```
+
+# persistent volume
+```bash
+kubectl get pv
+kubectl describe pv <name_pv>
+kubectl get pvc # persistent volume claim
+kubectl describe pvc <name_pvc>
+
+kubectl delete pv <name_pv>
+kubectl delete pvc <name_pvc>
 ```
 
 # addons

@@ -189,6 +189,8 @@ this is my container file and learn container
 <ul>
  <li><a href='kubernetes/04/01%20-%20deployment.md'>01 - deployment</a></li>
  <li><a href='kubernetes/04/02%20-%20update%20deployment.md'>02 - update deployment</a></li>
+ <li><a href='kubernetes/04/03%20-%20rollback%20deployment.md'>03 - rollback deployment</a></li>
+ <li><a href='kubernetes/04/04%20-%20persistent%20volume.md'>04 - persistent volume</a></li>
 </ul>
 
 </details>
