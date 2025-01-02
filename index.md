@@ -125,76 +125,76 @@ this is my container file and learn container
 </details>
 
 <details>
-<summary><b>kubernetes\00</b></summary>
+<summary><b>kubernetes\00 - pengenalan</b></summary>
 <ul>
- <li><a href='kubernetes/00/01 - pengenalan.html'>01 - pengenalan</a></li>
- <li><a href='kubernetes/00/02 - arsitektur kubernetes.html'>02 - arsitektur kubernetes</a></li>
- <li><a href='kubernetes/00/03 - menginstall kubernetes.html'>03 - menginstall kubernetes</a></li>
- <li><a href='kubernetes/00/04 - minikube.html'>04 - minikube</a></li>
- <li><a href='kubernetes/00/__readme__.html'>__readme__</a></li>
+ <li><a href='kubernetes/00 - pengenalan/01 - pengenalan.html'>01 - pengenalan</a></li>
+ <li><a href='kubernetes/00 - pengenalan/02 - arsitektur kubernetes.html'>02 - arsitektur kubernetes</a></li>
+ <li><a href='kubernetes/00 - pengenalan/03 - menginstall kubernetes.html'>03 - menginstall kubernetes</a></li>
+ <li><a href='kubernetes/00 - pengenalan/04 - minikube.html'>04 - minikube</a></li>
+ <li><a href='kubernetes/00 - pengenalan/__readme__.html'>__readme__</a></li>
 </ul>
 
 </details>
 
 <details>
-<summary><b>kubernetes\01</b></summary>
+<summary><b>kubernetes\01 -  fundamentals</b></summary>
 <ul>
- <li><a href='kubernetes/01/01 - node.html'>01 - node</a></li>
- <li><a href='kubernetes/01/02 - pod.html'>02 - pod</a></li>
- <li><a href='kubernetes/01/03 - label.html'>03 - label</a></li>
- <li><a href='kubernetes/01/04 - annotation.html'>04 - annotation</a></li>
- <li><a href='kubernetes/01/05 - namespace.html'>05 - namespace</a></li>
- <li><a href='kubernetes/01/06 - probe.html'>06 - probe</a></li>
- <li><a href='kubernetes/01/07 - replication controler.html'>07 - replication controler</a></li>
- <li><a href='kubernetes/01/08 - replication set.html'>08 - replication set</a></li>
+ <li><a href='kubernetes/01 -  fundamentals/01 - node.html'>01 - node</a></li>
+ <li><a href='kubernetes/01 -  fundamentals/02 - pod.html'>02 - pod</a></li>
+ <li><a href='kubernetes/01 -  fundamentals/03 - label.html'>03 - label</a></li>
+ <li><a href='kubernetes/01 -  fundamentals/04 - annotation.html'>04 - annotation</a></li>
+ <li><a href='kubernetes/01 -  fundamentals/05 - namespace.html'>05 - namespace</a></li>
+ <li><a href='kubernetes/01 -  fundamentals/06 - probe.html'>06 - probe</a></li>
+ <li><a href='kubernetes/01 -  fundamentals/07 - replication controler.html'>07 - replication controler</a></li>
+ <li><a href='kubernetes/01 -  fundamentals/08 - replication set.html'>08 - replication set</a></li>
 </ul>
 
 </details>
 
 <details>
-<summary><b>kubernetes\02</b></summary>
+<summary><b>kubernetes\02 - workloads-and-services</b></summary>
 <ul>
- <li><a href='kubernetes/02/01 - daemon set.html'>01 - daemon set</a></li>
- <li><a href='kubernetes/02/02 - job.html'>02 - job</a></li>
- <li><a href='kubernetes/02/03 - cron job.html'>03 - cron job</a></li>
- <li><a href='kubernetes/02/04 - node selector.html'>04 - node selector</a></li>
- <li><a href='kubernetes/02/05 - all.html'>05 - all</a></li>
- <li><a href='kubernetes/02/06 - service.html'>06 - service</a></li>
- <li><a href='kubernetes/02/07 - external service.html'>07 - external service</a></li>
- <li><a href='kubernetes/02/08 - expose service.html'>08 - expose service</a></li>
- <li><a href='kubernetes/02/09 - service NodePort.html'>09 - service NodePort</a></li>
- <li><a href='kubernetes/02/10 - service LoadBalancer.html'>10 - service LoadBalancer</a></li>
- <li><a href='kubernetes/02/11 - service ingress.html'>11 - service ingress</a></li>
+ <li><a href='kubernetes/02 - workloads-and-services/01 - daemon set.html'>01 - daemon set</a></li>
+ <li><a href='kubernetes/02 - workloads-and-services/02 - job.html'>02 - job</a></li>
+ <li><a href='kubernetes/02 - workloads-and-services/03 - cron job.html'>03 - cron job</a></li>
+ <li><a href='kubernetes/02 - workloads-and-services/04 - node selector.html'>04 - node selector</a></li>
+ <li><a href='kubernetes/02 - workloads-and-services/05 - all.html'>05 - all</a></li>
+ <li><a href='kubernetes/02 - workloads-and-services/06 - service.html'>06 - service</a></li>
+ <li><a href='kubernetes/02 - workloads-and-services/07 - external service.html'>07 - external service</a></li>
+ <li><a href='kubernetes/02 - workloads-and-services/08 - expose service.html'>08 - expose service</a></li>
+ <li><a href='kubernetes/02 - workloads-and-services/09 - service NodePort.html'>09 - service NodePort</a></li>
+ <li><a href='kubernetes/02 - workloads-and-services/10 - service LoadBalancer.html'>10 - service LoadBalancer</a></li>
+ <li><a href='kubernetes/02 - workloads-and-services/11 - service ingress.html'>11 - service ingress</a></li>
 </ul>
 
 </details>
 
 <details>
-<summary><b>kubernetes\03</b></summary>
+<summary><b>kubernetes\03 - configuration-and-storage</b></summary>
 <ul>
- <li><a href='kubernetes/03/01 - multi container pod.html'>01 - multi container pod</a></li>
- <li><a href='kubernetes/03/02 - volume.html'>02 - volume</a></li>
- <li><a href='kubernetes/03/03 - sharing volume.html'>03 - sharing volume</a></li>
- <li><a href='kubernetes/03/04 - environment variable.html'>04 - environment variable</a></li>
- <li><a href='kubernetes/03/05 - configmap.html'>05 - configmap</a></li>
- <li><a href='kubernetes/03/06 - secret.html'>06 - secret</a></li>
- <li><a href='kubernetes/03/07 - downward API.html'>07 - downward API</a></li>
- <li><a href='kubernetes/03/08 - manage kubernetes object.html'>08 - manage kubernetes object</a></li>
+ <li><a href='kubernetes/03 - configuration-and-storage/01 - multi container pod.html'>01 - multi container pod</a></li>
+ <li><a href='kubernetes/03 - configuration-and-storage/02 - volume.html'>02 - volume</a></li>
+ <li><a href='kubernetes/03 - configuration-and-storage/03 - sharing volume.html'>03 - sharing volume</a></li>
+ <li><a href='kubernetes/03 - configuration-and-storage/04 - environment variable.html'>04 - environment variable</a></li>
+ <li><a href='kubernetes/03 - configuration-and-storage/05 - configmap.html'>05 - configmap</a></li>
+ <li><a href='kubernetes/03 - configuration-and-storage/06 - secret.html'>06 - secret</a></li>
+ <li><a href='kubernetes/03 - configuration-and-storage/07 - downward API.html'>07 - downward API</a></li>
+ <li><a href='kubernetes/03 - configuration-and-storage/08 - manage kubernetes object.html'>08 - manage kubernetes object</a></li>
 </ul>
 
 </details>
 
 <details>
-<summary><b>kubernetes\04</b></summary>
+<summary><b>kubernetes\04 - advanced-topics</b></summary>
 <ul>
- <li><a href='kubernetes/04/01 - deployment.html'>01 - deployment</a></li>
- <li><a href='kubernetes/04/02 - update deployment.html'>02 - update deployment</a></li>
- <li><a href='kubernetes/04/03 - rollback deployment.html'>03 - rollback deployment</a></li>
- <li><a href='kubernetes/04/04 - persistent volume.html'>04 - persistent volume</a></li>
- <li><a href='kubernetes/04/05 - statefulset.html'>05 - statefulset</a></li>
- <li><a href='kubernetes/04/06 - kubernetes dashboard.html'>06 - kubernetes dashboard</a></li>
- <li><a href='kubernetes/04/07 - computational resources.html'>07 - computational resources</a></li>
- <li><a href='kubernetes/04/08 - horizontal pod autoscaler.html'>08 - horizontal pod autoscaler</a></li>
+ <li><a href='kubernetes/04 - advanced-topics/01 - deployment.html'>01 - deployment</a></li>
+ <li><a href='kubernetes/04 - advanced-topics/02 - update deployment.html'>02 - update deployment</a></li>
+ <li><a href='kubernetes/04 - advanced-topics/03 - rollback deployment.html'>03 - rollback deployment</a></li>
+ <li><a href='kubernetes/04 - advanced-topics/04 - persistent volume.html'>04 - persistent volume</a></li>
+ <li><a href='kubernetes/04 - advanced-topics/05 - statefulset.html'>05 - statefulset</a></li>
+ <li><a href='kubernetes/04 - advanced-topics/06 - kubernetes dashboard.html'>06 - kubernetes dashboard</a></li>
+ <li><a href='kubernetes/04 - advanced-topics/07 - computational resources.html'>07 - computational resources</a></li>
+ <li><a href='kubernetes/04 - advanced-topics/08 - horizontal pod autoscaler.html'>08 - horizontal pod autoscaler</a></li>
 </ul>
 
 </details>
