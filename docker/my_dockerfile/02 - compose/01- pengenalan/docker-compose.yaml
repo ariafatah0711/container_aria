@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  nginx-aria-1:
+    container_name: nginx-aria-1
+    image: nginx
+    ports:
+      - target: 80
+        published: 8081
+        protocol: tcp
+  nginx-aria-2:
+    container_name: nginx-aria-2
+    image: nginx
+    ports:
+      - "8082:80"
+  mongod-aria:
+    container_name: mongodb-aria
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ariafatah
+      MONGO_INITDB_ROOT_PASSWORD: ariafatah
+      MONGO_INITDB_DATABASE: admin

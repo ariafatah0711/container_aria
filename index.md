@@ -191,6 +191,10 @@ this is my container file and learn container
  <li><a href='kubernetes/04/02 - update deployment.html'>02 - update deployment</a></li>
  <li><a href='kubernetes/04/03 - rollback deployment.html'>03 - rollback deployment</a></li>
  <li><a href='kubernetes/04/04 - persistent volume.html'>04 - persistent volume</a></li>
+ <li><a href='kubernetes/04/05 - statefulset.html'>05 - statefulset</a></li>
+ <li><a href='kubernetes/04/06 - kubernetes dashboard.html'>06 - kubernetes dashboard</a></li>
+ <li><a href='kubernetes/04/07 - computational resources.html'>07 - computational resources</a></li>
+ <li><a href='kubernetes/04/08 - horizontal pod autoscaler.html'>08 - horizontal pod autoscaler</a></li>
 </ul>
 
 </details>

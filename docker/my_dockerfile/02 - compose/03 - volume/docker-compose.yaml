@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  mongodb-1:
+    container_name: mongodb-1
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ariafatah
+      MONGO_INITDB_ROOT_PASSWORD: ariafatah
+      MONGO_INITDB_DATABASE: admin
+    volumes:
+      - "mongo-data-1:/data/db"
+  mongodb-2:
+    container_name: mongodb-2
+    image: mongo
+    ports:
+      - "27018:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ariafatah
+      MONGO_INITDB_ROOT_PASSWORD: ariafatah
+      MONGO_INITDB_DATABASE: admin
+    volumes:
+      - type: volume
+        source: mongo-data-2
+        target: "/data/db"
+        read_only: false
+
+volumes:
+  mongo-data-1:
+    name: mongo-data-1
+  mongo-data-2:
+    name: mongo-data-2
+  

@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  nginx-aria-1:
+    container_name: nginx-aria-1
+    image: nginx
+    ports:
+      - target: 80
+        published: 8081
+        protocol: tcp
+    deploy:
+      resources:
+          reservations:
+              cpus: "0.25"
+              memory: 50M
+          limits:
+              cpus: "0.5"
+              memory: 100M

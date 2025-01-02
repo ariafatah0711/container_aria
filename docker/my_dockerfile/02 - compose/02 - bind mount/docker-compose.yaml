@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  mongodb-aria:
+    container_name: mongodb-aria
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ariafatah
+      MONGO_INITDB_ROOT_PASSWORD: ariafatah
+      MONGO_INITDB_DATABASE: admin
+    volumes:
+      - "./data:/data/db"
+  mongodb-2:
+    container_name: mongodb-2
+    image: mongo
+    ports:
+      - "27018:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+      MONGO_INITDB_DATABASE: admin
+    volumes:
+      - type: bind
+        source: "./data-2"
+        target: "/data/db"
+        read_only: false
