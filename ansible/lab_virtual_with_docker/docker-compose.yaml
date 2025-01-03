@@ -1,0 +1,41 @@
+version: "3.9"
+services:
+  node11:
+    build:
+      context: ./node
+    container_name: node11
+    hostname: node11
+    networks:
+      - ansible_net
+    tty: true
+    stdin_open: true
+
+  node12:
+    build:
+      context: ./node
+    container_name: node12
+    hostname: node12
+    networks:
+      - ansible_net
+    tty: true
+    stdin_open: true
+
+  ansible-controller_tmp:
+    build:
+      context: ./controller
+    container_name: ansible-controller_tmp
+    hostname: ansible-controller_tmp
+    networks:
+      - ansible_net
+    volumes:
+      - /mnt/c/Users/ariaf/OneDrive/Dokumen/github_aria/container_aria/ansible/:/ansible_aria:Z
+    tty: true
+    stdin_open: true
+    depends_on:
+      - node11
+      - node12
+
+networks:
+  ansible_net:
+    driver: bridge
+

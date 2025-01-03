@@ -24,6 +24,8 @@ docker container start 7b4c0acad15d # with container ID
 docker container stop redis-app # stop container
 
 docker container rm redis-app # menghapus container
+
+docker rename <old_name> <new_name>
 ```
 
 # container logs
