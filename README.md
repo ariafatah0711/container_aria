@@ -138,14 +138,6 @@ this is my container file and learn container
 </details>
 
 <details>
-<summary><b>ansible\lab_virtual_with_docker</b></summary>
-<ul>
- <li><a href='ansible/lab_virtual_with_docker/readme.md'>readme</a></li>
-</ul>
-
-</details>
-
-<details>
 <summary><b>kubernetes\00 - pengenalan</b></summary>
 <ul>
  <li><a href='kubernetes/00%20-%20pengenalan/01%20-%20pengenalan.md'>01 - pengenalan</a></li>

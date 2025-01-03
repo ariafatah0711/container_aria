@@ -89,7 +89,7 @@ def collect_data(path, priority_folders, exclude_dirs):
 def generate_file_list(path, type="md"):
     output = ""
     priority_folders = ['docker/docker dasar', 'docker/docker file', 'docker', 'podman']
-    exclude_dirs = {".git", "_layouts", "readme"}
+    exclude_dirs = {".git", "_layouts", "readme", "lab_virtual_with_docker"}
     
     data = collect_data(".", priority_folders, exclude_dirs)
 
