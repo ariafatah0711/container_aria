@@ -125,6 +125,27 @@ this is my container file and learn container
 </details>
 
 <details>
+<summary><b>ansible\01 - ansible dasar</b></summary>
+<ul>
+ <li><a href='ansible/01%20-%20ansible%20dasar/01%20-%20pengenalan%20ansible.md'>01 - pengenalan ansible</a></li>
+ <li><a href='ansible/01%20-%20ansible%20dasar/02%20-%20menginstall%20ansible.md'>02 - menginstall ansible</a></li>
+ <li><a href='ansible/01%20-%20ansible%20dasar/03%20-%20mempersiapkan%20linux%20server.md'>03 - mempersiapkan linux server</a></li>
+ <li><a href='ansible/01%20-%20ansible%20dasar/04%20-%20ansible-inventory.md'>04 - ansible-inventory</a></li>
+ <li><a href='ansible/01%20-%20ansible%20dasar/05%20-%20ansible%20config.md'>05 - ansible config</a></li>
+ <li><a href='ansible/01%20-%20ansible%20dasar/readme.md'>readme</a></li>
+</ul>
+
+</details>
+
+<details>
+<summary><b>ansible\lab_virtual_with_docker</b></summary>
+<ul>
+ <li><a href='ansible/lab_virtual_with_docker/readme.md'>readme</a></li>
+</ul>
+
+</details>
+
+<details>
 <summary><b>kubernetes\00 - pengenalan</b></summary>
 <ul>
  <li><a href='kubernetes/00%20-%20pengenalan/01%20-%20pengenalan.md'>01 - pengenalan</a></li>

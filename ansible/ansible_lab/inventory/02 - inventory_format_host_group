@@ -1,0 +1,9 @@
+mail.example_aria.com
+
+[node_docker]
+node1
+node2
+
+[database]
+db1
+db2

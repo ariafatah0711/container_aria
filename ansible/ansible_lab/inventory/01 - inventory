@@ -1,0 +1,10 @@
+# node1
+# node2
+
+#======================================================================
+
+node1 ansible_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
+node2 ansible_user=root ansible_ssh_private_key_file=/ssh_node/private.key
+
+# node2 ansible_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
+# node3 ansible_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa

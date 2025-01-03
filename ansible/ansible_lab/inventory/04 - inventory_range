@@ -1,0 +1,6 @@
+[node_docker]
+node[1:3]
+
+[node_docker:vars]
+ansible_user=root
+ansible_ssh_private_key_file=/ssh_node/private.key
