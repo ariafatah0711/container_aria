@@ -27,7 +27,8 @@
                 </h3> -->
                 <h4 style="display: flex; justify-content: space-between; align-items: center;">
                     <div style="display: flex; gap: 3px;">
-                        {% if page.url | split: '/' | size <= 2 %} <!-- Jika path URL hanya memiliki 2 segmen -->
+                        {% assign path_segments = page.url | split: '/' %}
+                        {% if path_segments.size <= 3 %} <!-- Jika URL hanya memiliki 2 segmen -->
                             <a href="{{ site.url }}" style="color: red;">
                                 {{ site.url | replace_first: 'https://', '' }}/
                             </a>
@@ -35,13 +36,12 @@
                                 {{ site.repo }}
                             </a>
                             {% else %}
-                            <!-- Jika path URL memiliki lebih dari 2 segmen -->
+                            <!-- Jika URL memiliki lebih dari 2 segmen -->
                             <a href="{{ site.url }}/{{ site.repo }}" style="color: red;">
                                 {{ site.repo }}
                             </a>
                             <a href="#" style="color: red;">
-                                /{{ page.url | split: '/' | reverse | slice: 0, 2 | reverse | join: '/' | replace:
-                                '%20', ' ' }}
+                                /{{ path_segments | slice: 2, path_segments.size | join: '/' | replace: '%20', ' ' }}
                             </a>
                             {% endif %}
                     </div>
