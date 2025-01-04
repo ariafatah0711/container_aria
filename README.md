@@ -136,6 +136,10 @@ this is my container file and learn container
  <li><a href='ansible/01%20-%20ansible%20dasar/07%20-%20ansible%20playbook.md'>07 - ansible playbook</a></li>
  <li><a href='ansible/01%20-%20ansible%20dasar/08%20-%20ansible%20playbook%20variables.md'>08 - ansible playbook variables</a></li>
  <li><a href='ansible/01%20-%20ansible%20dasar/09%20-%20ansible%20conditionalls.md'>09 - ansible conditionalls</a></li>
+ <li><a href='ansible/01%20-%20ansible%20dasar/10%20-%20ansible%20task%20control.md'>10 - ansible task control</a></li>
+ <li><a href='ansible/01%20-%20ansible%20dasar/11%20-%20ansible%20tags.md'>11 - ansible tags</a></li>
+ <li><a href='ansible/01%20-%20ansible%20dasar/12%20-%20ansible%20loops.md'>12 - ansible loops</a></li>
+ <li><a href='ansible/01%20-%20ansible%20dasar/13%20-%20ansible%20vault.md'>13 - ansible vault</a></li>
  <li><a href='ansible/01%20-%20ansible%20dasar/readme.md'>readme</a></li>
 </ul>
 

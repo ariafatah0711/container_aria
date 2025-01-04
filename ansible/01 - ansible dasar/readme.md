@@ -3,6 +3,9 @@
 - [ansible playbook](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_intro.html#ansible-playbooks)
 - [ansible playbook vars](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_variables.html)
 - [conditional](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_conditionals.html#conditionals)
+- [tags](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_tags.html#tags)
+- [loops](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_loops.html)
+- [vault](https://docs.ansible.com/ansible/latest/vault_guide/index.html#protecting-sensitive-data-with-ansible-vault)
 
 ## install
 ```bash
@@ -28,6 +31,8 @@ ansible webservers -m service -a "name=httpd state=restarted" -i inventory
 ansible [pattern] -m [module] -a "[module options]"
 
 ansible-playbook <playbook.yaml>
+ansible-playbook <playbook.yaml> --check # only check the module not execute
+ansible-playbook <playbook.yaml> --ask-vault-pass # with vault file encrypt
 ```
 
 ## inventory
@@ -69,7 +74,12 @@ inventory=./inventory/hosts
 host_key_checking=False
 
 #==========================================================
-# 2
+# forks => task pararel
+[defaults]
+inventory=./inventory/hosts
+host_key_checking=False
+
+forks = 30
 ```
 
 ## module
@@ -234,4 +244,322 @@ merged_dict: "{{ dict1 | ansible.builtin.combine(dict2) }}"
         mode: '644'
         owner: "{{ user_app }}"
         group: "{{ user_app }}"
+```
+
+## 03 - playbook conditional
+```bash
+tasks:
+  - name: Configure SELinux to start mysql on any port
+    ansible.posix.seboolean:
+      name: mysql_connect_any
+      state: true
+      persistent: true
+    when: ansible_selinux.status == "enabled"
+```
+
+### 04 - playbook-webserver_when.yaml
+```yaml
+---
+- name: Playbook setup web server
+  hosts: node_docker
+  become: true
+  # gather_facts: true # defaultnya memang true
+  vars: # mendefinisikan variable
+    user_app: ansibleweb
+  tasks:
+
+    ## Install nginx
+    - name: Install nginx (Debian)
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+      when:
+        - ansible_os_family == "Debian"
+        - ansible_processor_cores >= 1 or ansible_memory_mb.real.total >= 512
+    - name: Install nginx (Alpine)
+      community.general.apk:
+        name: nginx
+        state: present
+      when:
+        - ansible_os_family == "Alpine"
+        - ansible_processor_cores >= 1 or ansible_memory_mb.real.total >= 512
+
+    ## Buat user
+    - name: Buat user (Debian) {{ user_app }}
+      ansible.builtin.user:
+        name: "{{ user_app }}"
+        password: belajaransible
+        shell: /bin/bash
+      when:
+        - ansible_os_family == "Debian"
+    - name: Buat user (Alpine) {{ user_app }}
+      ansible.builtin.user:
+        name: "{{ user_app }}"
+        password: belajaransible
+        shell: /bin/sh
+      when:
+        - ansible_os_family == "Alpine"
+
+    ## Copy file html
+    - name: Copy file html (Debian)
+      ansible.builtin.copy:
+        src: ./web/
+        dest: /var/www/html/
+        mode: '604'
+        owner: "{{ user_app }}"
+        group: "{{ user_app }}"
+      when:
+        - ansible_os_family == "Debian"
+    - name: Copy file html (Alpine)
+      ansible.builtin.copy:
+        src: ./web/
+        dest: /usr/share/nginx/html
+        mode: '604'
+        owner: "{{ user_app }}"
+        group: "{{ user_app }}"
+      when:
+        - ansible_os_family == "Alpine"
+```
+
+## 03 - playbook tags
+```yaml
+tasks:
+- name: Install the servers
+  ansible.builtin.yum:
+    name:
+    - httpd
+    - memcached
+    state: present
+  tags:
+  - packages
+  - webservers
+
+- name: Configure the service
+  ansible.builtin.template:
+    src: templates/src.j2
+    dest: /etc/foo.conf
+  tags:
+  - configuration
+```
+
+### 05 - playbook-webserver_tags.yaml
+```yaml
+---
+- name: Playbook setup web server
+  hosts: node_docker
+  become: true
+  gather_facts: true # defaultnya memang true
+  vars: # mendefinisikan variable
+    user_app: ansibleweb
+  tasks:
+
+    ## Install nginx
+    - name: Install nginx (Debian)
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+      when:
+        - ansible_os_family == "Debian"
+        - ansible_processor_cores >= 1 or ansible_memory_mb.real.total >= 512
+      tags:
+        - install
+    - name: Install nginx (Alpine)
+      community.general.apk:
+        name: nginx
+        state: present
+      when:
+        - ansible_os_family == "Alpine"
+        - ansible_processor_cores >= 1 or ansible_memory_mb.real.total >= 512
+      tags:
+        - install
+
+    ## Buat user
+    - name: Buat user (Debian) {{ user_app }}
+      ansible.builtin.user:
+        name: "{{ user_app }}"
+        password: belajaransible
+        shell: /bin/bash
+      when:
+        - ansible_os_family == "Debian"
+      tags:
+        - setup
+        - create_user
+    - name: Buat user (Alpine) {{ user_app }}
+      ansible.builtin.user:
+        name: "{{ user_app }}"
+        password: belajaransible
+        shell: /bin/sh
+      when:
+        - ansible_os_family == "Alpine"
+      tags:
+        - setup
+        - create_user
+
+    ## Copy file html
+    - name: Copy file html (Debian)
+      ansible.builtin.copy:
+        src: ./web/
+        dest: /var/www/html/
+        mode: '604'
+        owner: "{{ user_app }}"
+        group: "{{ user_app }}"
+      when:
+        - ansible_os_family == "Debian"
+      tags:
+        - setup
+        - copy_file
+    - name: Copy file html (Alpine)
+      ansible.builtin.copy:
+        src: ./web/
+        dest: /usr/share/nginx/html
+        mode: '604'
+        owner: "{{ user_app }}"
+        group: "{{ user_app }}"
+      when:
+        - ansible_os_family == "Alpine"
+      tags:
+        - setup
+        - copy_file
+```
+
+## 04 - playbook loops
+```yaml
+# 1 with_items
+with_items:
+  - 1
+  - [2,3]
+  - 4
+
+loop: "{{ [1, [2, 3], 4] | flatten(1) }}"
+loop: "{{ lookup('fileglob', '*.txt', wantlist=True) }}"
+with_fileglob: '*.txt'
+
+# 2 loop
+- name: Add several users
+  ansible.builtin.user:
+    name: "{{ item }}"
+    state: present
+    groups: "wheel"
+  loop:
+     - testuser1
+     - testuser2
+
+# 3 loop
+- name: Add several users
+  ansible.builtin.user:
+    name: "{{ item.name }}"
+    state: present
+    groups: "{{ item.groups }}"
+  loop:
+    - { name: 'testuser1', groups: 'wheel' }
+    - { name: 'testuser2', groups: 'root' }
+
+# 4 with list
+- name: with_list
+  ansible.builtin.debug:
+    msg: "{{ item }}"
+  with_list:
+    - one
+    - two
+``` 
+
+### 06 - playbook-php_loops.yaml
+```yaml
+---
+- name: Playbook setup PHP
+  hosts: node_docker
+  become: true
+  gather_facts: true # defaultnya memang true
+  vars:
+    # taget_php_version: 8.2
+    taget_php_version: Null
+  tasks:
+    - name: Add repository for PHP
+      ansible.builtin.apt_repository:
+        repo: 'ppa:ondrej/php'
+        state: present
+      tags:
+        - prepare
+        - add_repo_php
+
+    - name: Update repo
+      ansible.builtin.apt:
+        update_cache: true
+      tags: prepare
+
+    - name: Install php {{ taget_php_version }}
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - php{{ taget_php_version }}
+        - php{{ taget_php_version }}-cli
+        - php{{ taget_php_version }}-common
+        - php{{ taget_php_version }}-imap
+        - php{{ taget_php_version }}-redis
+        - php{{ taget_php_version }}-xml
+        - php{{ taget_php_version }}-zip
+        - php{{ taget_php_version }}-mbstring
+        - php{{ taget_php_version }}-curl
+        - php{{ taget_php_version }}-gd
+        - php{{ taget_php_version }}-bcmath
+        - php{{ taget_php_version }}-gmp
+        - php{{ taget_php_version }}-mysqli
+      tags:
+        - install
+```
+
+# ansible vault
+## create encrypt file
+```yaml
+ansible-vault create <nama_file>
+ansible-vault create secret-user.yaml
+# New Vault password: # 123 (example)
+# Confirm New Vault password: # 123 (example)
+
+# text editor =======
+user_pass: pass123
+#===================
+
+cat secret-user.yaml
+# $ANSIBLE_VAULT;1.1;AES256
+# 38303762303065326161333033633365613733666232353235626365346465663963613463653233...
+```
+
+## view / edit encrypt file
+```yaml
+ansible-vault edit <nama_file>
+ansible-vault view <nama_file>
+
+ansible-vault view secret-user.yaml
+# Vault password: 123
+# user_pass: pass123
+
+ansible-vault edit secret-user.yaml
+# Vault password: 123
+```
+
+### 07 - playbook-vault.yaml
+```yaml
+- name: Playbook buat user baru
+  hosts: node_docker
+  become: true
+  gather_facts: true # defaultnya memang true
+  vars: # mendefinisikan variable
+    user_app: user01
+  tasks:
+
+    - name: Parsing variable dari secret file
+      ansible.builtin.include_vars:
+        file: secret-user.yaml
+
+    - name: Add new user
+      ansible.builtin.user:
+        name: "{{ user_app }}"
+        # password: belajaransible # gak secure kita ganti pake Ansible Vault
+
+        password: "{{ user_pass | password_hash('sha512') }}" # ambil value dari variable lalu lakukan hash
+        shell: /bin/bash
+      when:
+        - ansible_os_family == "Debian"
 ```
