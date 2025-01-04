@@ -130,8 +130,10 @@ this is my container file and learn container
  <li><a href='ansible/01 - ansible dasar/01 - pengenalan ansible.html'>01 - pengenalan ansible</a></li>
  <li><a href='ansible/01 - ansible dasar/02 - menginstall ansible.html'>02 - menginstall ansible</a></li>
  <li><a href='ansible/01 - ansible dasar/03 - mempersiapkan linux server.html'>03 - mempersiapkan linux server</a></li>
- <li><a href='ansible/01 - ansible dasar/04 - ansible-inventory.html'>04 - ansible-inventory</a></li>
+ <li><a href='ansible/01 - ansible dasar/04 - ansible inventory.html'>04 - ansible inventory</a></li>
  <li><a href='ansible/01 - ansible dasar/05 - ansible config.html'>05 - ansible config</a></li>
+ <li><a href='ansible/01 - ansible dasar/06 - ansible module.html'>06 - ansible module</a></li>
+ <li><a href='ansible/01 - ansible dasar/07 - ansible playbook.html'>07 - ansible playbook</a></li>
  <li><a href='ansible/01 - ansible dasar/readme.html'>readme</a></li>
 </ul>
 

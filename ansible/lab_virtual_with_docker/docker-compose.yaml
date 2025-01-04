@@ -1,30 +1,40 @@
 version: "3.9"
 services:
-  node11:
+  node1:
     build:
       context: ./node
-    container_name: node11
-    hostname: node11
+    container_name: node1
+    hostname: node1
     networks:
       - ansible_net
     tty: true
     stdin_open: true
 
-  node12:
+  node2:
     build:
       context: ./node
-    container_name: node12
-    hostname: node12
+    container_name: node2
+    hostname: node2
+    networks:
+      - ansible_net
+    tty: true
+    stdin_open: true
+  
+  node3:
+    build:
+      context: ./node
+    container_name: node3
+    hostname: node3
     networks:
       - ansible_net
     tty: true
     stdin_open: true
 
-  ansible-controller_tmp:
+  ansible:
     build:
       context: ./controller
-    container_name: ansible-controller_tmp
-    hostname: ansible-controller_tmp
+    container_name: ansible
+    hostname: ansible
     networks:
       - ansible_net
     volumes:
@@ -32,8 +42,8 @@ services:
     tty: true
     stdin_open: true
     depends_on:
-      - node11
-      - node12
+      - node1
+      - node2
 
 networks:
   ansible_net:

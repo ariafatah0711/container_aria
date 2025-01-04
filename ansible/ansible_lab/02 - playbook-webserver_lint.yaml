@@ -1,0 +1,20 @@
+---
+- name: Playbook setup web server
+  hosts: node_docker
+  tasks:
+    - name: Update repository
+      ansible.builtin.apt:
+        update_cache: true
+    - name: Install nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+    - name: Copy file html
+      ansible.builtin.copy:
+        src: ./web/
+        dest: /var/www/html
+        mode: '644'
+    - name: Start ngix
+      ansible.builtin.sysvinit:
+        name: nginx
+        state: started
