@@ -26,14 +26,23 @@
                     {{ page.url | split: '/' | reverse | slice: 0, 2 | reverse | join: '/' | replace: '%20', ' ' }}
                 </h3> -->
                 <h4 style="display: flex; justify-content: space-between; align-items: center;">
-                    <a href=" {{ site.url }}">{{ site.url | replace_first: 'https://', '' }}/</a><a
-                        href="{{ site.url }}/{{ site.repo }}">{{
-                        site.repo }}</a><a href="#">/{{ page.url | split: '/' | reverse | slice: 0, 2 | reverse | join:
-                        '/' | replace: '%20', ' ' }}
-                    </a>
-                    <a href="{{ site.github.owner_url }}/{{site.repo}}">
-                        🌍 github_repo
-                    </a>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="{{ site.url }}" style="color: red;">
+                            {{ site.url | replace_first: 'https://', '' }}/
+                        </a>
+                        <a href="{{ site.url }}/{{ site.repo }}" style="color: red;">
+                            {{ site.repo }}
+                        </a>
+                        <a href="#" style="color: red;">
+                            /{{ page.url | split: '/' | reverse | slice: 0, 2 | reverse | join: '/' | replace: '%20', '
+                            ' }}
+                        </a>
+                    </div>
+                    <div>
+                        <a href="{{ site.github.owner_url }}/{{ site.repo }}" style="color: red;">
+                            🌍 github_repo
+                        </a>
+                    </div>
                 </h4>
             </header>
             <section id=" downloads" class="clearfix">
