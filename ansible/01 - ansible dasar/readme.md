@@ -1,6 +1,8 @@
 - [list module](https://docs.ansible.com/ansible/latest/collections/index_module.html#index-of-all-modules)
 - [module ad hoc command](https://docs.ansible.com/ansible/latest/command_guide/intro_adhoc.html#introduction-to-ad-hoc-commands)
 - [ansible playbook](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_intro.html#ansible-playbooks)
+- [ansible playbook vars](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_variables.html)
+- [conditional](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_conditionals.html#conditionals)
 
 ## install
 ```bash
@@ -155,7 +157,7 @@ ansible node_docker -m command -a "cat /tmp/data.txt"
         enabled: True
 ```
 
-### 01 - playbook-webserver.yaml
+### 02 - playbook-webserver.yaml
 ```yaml
 ---
 - name: Playbook setup web server
@@ -177,4 +179,59 @@ ansible node_docker -m command -a "cat /tmp/data.txt"
       ansible.builtin.sysvinit:
         name: nginx
         state: started
+        enabled: true
+```
+
+## 02 - playbook vars
+```yaml
+# list
+region:
+  - northeast
+  - southeast
+  - midwest
+
+## mamnggil list
+region: "{{ region[0] }}"
+
+# dictionary
+foo:
+  field1: one
+  field2: two
+
+## memanggil dictionary
+{{ foo['field1'] }}
+{{ foo.field1 }}
+
+# merged list
+merged_list: "{{ list1 + list2 }}"
+
+# merged dict
+merged_dict: "{{ dict1 | ansible.builtin.combine(dict2) }}"
+```
+
+### 03 - playbook_webserver_vars
+```yaml
+---
+- name: Playbook setup web server
+  hosts: node_docker
+  become: true
+  vars: # mendefinisikan variable
+    user_app: ansibleweb
+  tasks:
+    - name: Install nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+    - name: Buat user {{ user_app }}
+      ansible.builtin.user:
+        name: "{{ user_app }}"
+        password: belajaransible
+        shell: /bin/bash
+    - name: Copy file html
+      ansible.builtin.copy:
+        src: ./web/
+        dest: /var/www/html/
+        mode: '644'
+        owner: "{{ user_app }}"
+        group: "{{ user_app }}"
 ```

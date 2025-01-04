@@ -134,6 +134,8 @@ this is my container file and learn container
  <li><a href='ansible/01 - ansible dasar/05 - ansible config.html'>05 - ansible config</a></li>
  <li><a href='ansible/01 - ansible dasar/06 - ansible module.html'>06 - ansible module</a></li>
  <li><a href='ansible/01 - ansible dasar/07 - ansible playbook.html'>07 - ansible playbook</a></li>
+ <li><a href='ansible/01 - ansible dasar/08 - ansible playbook variables.html'>08 - ansible playbook variables</a></li>
+ <li><a href='ansible/01 - ansible dasar/09 - ansible conditionalls.html'>09 - ansible conditionalls</a></li>
  <li><a href='ansible/01 - ansible dasar/readme.html'>readme</a></li>
 </ul>
 

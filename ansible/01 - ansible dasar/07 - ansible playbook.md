@@ -6,7 +6,7 @@
 
 ![alt text](docs/images/image-1.png)
 
-## webserver
+## example
 ```yaml
 ---
 - name: Playbook setup web server

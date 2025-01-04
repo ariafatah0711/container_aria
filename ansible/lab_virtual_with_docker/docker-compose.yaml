@@ -7,6 +7,9 @@ services:
     hostname: node1
     networks:
       - ansible_net
+    ports:
+      - "10122:22"
+      - "10180:80"
     tty: true
     stdin_open: true
 
@@ -17,6 +20,9 @@ services:
     hostname: node2
     networks:
       - ansible_net
+    ports:
+      - "10222:22"
+      - "10280:80"
     tty: true
     stdin_open: true
   
@@ -27,6 +33,9 @@ services:
     hostname: node3
     networks:
       - ansible_net
+    ports:
+      - "10322:22"
+      - "10380:80"
     tty: true
     stdin_open: true
 
