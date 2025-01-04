@@ -1,6 +1,5 @@
 plugins:
   - jekyll-relative-links
-  - jekyll-remote-theme
 relative_links:
   enabled: true
   collections: true
@@ -11,6 +10,6 @@ exclude:
 include:
   - "*.md"
 
-remote_theme: pages-themes/midnight@v0.2.0
+theme: jekyll-theme-tactile
 
 repo: "container_aria"
