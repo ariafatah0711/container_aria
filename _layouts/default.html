@@ -26,17 +26,24 @@
                     {{ page.url | split: '/' | reverse | slice: 0, 2 | reverse | join: '/' | replace: '%20', ' ' }}
                 </h3> -->
                 <h4 style="display: flex; justify-content: space-between; align-items: center;">
-                    <div style="display: flex; gap: 10px;">
-                        <a href="{{ site.url }}" style="color: red;">
-                            {{ site.url | replace_first: 'https://', '' }}/
-                        </a>
-                        <a href="{{ site.url }}/{{ site.repo }}" style="color: red;">
-                            {{ site.repo }}
-                        </a>
-                        <a href="#" style="color: red;">
-                            /{{ page.url | split: '/' | reverse | slice: 0, 2 | reverse | join: '/' | replace: '%20', '
-                            ' }}
-                        </a>
+                    <div style="display: flex; gap: 3px;">
+                        {% if page.url | split: '/' | size <= 2 %} <!-- Jika path URL hanya memiliki 2 segmen -->
+                            <a href="{{ site.url }}" style="color: red;">
+                                {{ site.url | replace_first: 'https://', '' }}/
+                            </a>
+                            <a href="{{ site.url }}/{{ site.repo }}" style="color: red;">
+                                {{ site.repo }}
+                            </a>
+                            {% else %}
+                            <!-- Jika path URL memiliki lebih dari 2 segmen -->
+                            <a href="{{ site.url }}/{{ site.repo }}" style="color: red;">
+                                {{ site.repo }}
+                            </a>
+                            <a href="#" style="color: red;">
+                                /{{ page.url | split: '/' | reverse | slice: 0, 2 | reverse | join: '/' | replace:
+                                '%20', ' ' }}
+                            </a>
+                            {% endif %}
                     </div>
                     <div>
                         <a href="{{ site.github.owner_url }}/{{ site.repo }}" style="color: red;">
