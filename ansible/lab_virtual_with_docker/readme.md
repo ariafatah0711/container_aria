@@ -1,9 +1,6 @@
 ```bash
 docker compose up -d
 
-docker exec -it ansible bash -c "ssh-copy-id root@node1"
-docker exec -it ansible bash -c "ssh-copy-id root@node2"
-
 docker exec -it ansible bash -c "mkdir -p /ssh_node && \
 ssh-keygen -t rsa -f /ssh_node/id_rsa -q -N '' && \
 cp /ssh_node/id_rsa /ssh_node/private.key && \
