@@ -23,7 +23,7 @@
 - status.nostIP => ip address node
 
 ## configuration
-- example
+### example
 ```yaml
 apiVersion: v1
 kind: ConfigMap

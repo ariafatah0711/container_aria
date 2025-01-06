@@ -6,72 +6,72 @@
 - ini membuat proses update berjalan seamless, dan tidak terjadi downtime
 
 ## configuration
-- example
-  ```yaml
-  ## deployment pertama
-  apiVersion: apps/v1
-  kind: Deployment
-  metadata:
+### example
+```yaml
+## deployment pertama
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-web
+  labels:
     name: nodejs-web
-    labels:
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
       name: nodejs-web
-  spec:
-    replicas: 3
-    selector:
-      matchLabels:
-        name: nodejs-web
-    template:
-      metadata:
-        name: nodejs-web
-        labels:
-          name: nodejs-web
-      spec:
-        containers:
-          - name: nodejs-web
-            image: khannedy/nodejs-web:1
-            ports:
-              - containerPort: 3000
-
-  ---
-
-  apiVersion: v1
-  kind: Service
-  metadata:
-    name: nodejs-web-service
-  spec:
-    type: NodePort
-    selector:
+  template:
+    metadata:
       name: nodejs-web
-    ports:
-      - port: 3000
-        targetPort: 3000
-        nodePort: 30001
+      labels:
+        name: nodejs-web
+    spec:
+      containers:
+        - name: nodejs-web
+          image: khannedy/nodejs-web:1
+          ports:
+            - containerPort: 3000
 
+---
 
-  ## deployment ke 2
-  apiVersion: apps/v1
-  kind: Deployment
-  metadata:
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodejs-web-service
+spec:
+  type: NodePort
+  selector:
     name: nodejs-web
-    labels:
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 30001
+
+
+## deployment ke 2
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-web
+  labels:
+    name: nodejs-web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
       name: nodejs-web
-  spec:
-    replicas: 3
-    selector:
-      matchLabels:
+  template:
+    metadata:
+      name: nodejs-web
+      labels:
         name: nodejs-web
-    template:
-      metadata:
-        name: nodejs-web
-        labels:
-          name: nodejs-web
-      spec:
-        containers:
-          - name: nodejs-web
-            image: khannedy/nodejs-web:2
-            ports:
-              - containerPort: 3000
-  ```
+    spec:
+      containers:
+        - name: nodejs-web
+          image: khannedy/nodejs-web:2
+          ports:
+            - containerPort: 3000
+```
 
 ## command
 ```sh

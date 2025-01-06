@@ -78,21 +78,21 @@
 
 ## command
 - show 
-```bash
-kubectl get rc
-NAME                   READY   STATUS    RESTARTS         AGE
-nginx-rc-bvg5g         1/1     Running   0                108s
-nginx-rc-dklh5         1/1     Running   0                108s
-nginx-rc-swrsg         1/1     Running   0                108s
+  ```bash
+  kubectl get rc
+  NAME                   READY   STATUS    RESTARTS         AGE
+  nginx-rc-bvg5g         1/1     Running   0                108s
+  nginx-rc-dklh5         1/1     Running   0                108s
+  nginx-rc-swrsg         1/1     Running   0                108s
 
-# ketika dihapus maka secara otomatis akan di replica sampai menjadi 3 pod lagi
-kubectl delete pod 
+  # ketika dihapus maka secara otomatis akan di replica sampai menjadi 3 pod lagi
+  kubectl delete pod 
 
-kubectl get pod
-nginx-rc-cxlsq         1/1     Running            0              22s
-nginx-rc-dklh5         1/1     Running            0              3m25s
-nginx-rc-swrsg         1/1     Running            0              3m25s
-```
+  kubectl get pod
+  nginx-rc-cxlsq         1/1     Running            0              22s
+  nginx-rc-dklh5         1/1     Running            0              3m25s
+  nginx-rc-swrsg         1/1     Running            0              3m25s
+  ```
 
 ## menghapus rc
 - saat kita menghapus Replication controler, maka secara otomatis pod yang berada di label selector akan ikut terhapus

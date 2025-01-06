@@ -34,64 +34,64 @@ spec:
               servicePort: 80
 ```
 
-- example
-  ```yaml
-  apiVersion: apps/v1
-  kind: ReplicaSet
-  metadata:
-    name: nginx
-  spec:
-    replicas: 3
-    selector:
-      matchLabels:
-        name: nginx
-    template:
-      metadata:
-        name: nginx
-        labels:
-          name: nginx
-      spec:
-        containers:
-          - name: nginx
-            image: nginx
-            ports:
-              - containerPort: 80
-
-  ---
-
-  apiVersion: v1
-  kind: Service
-  metadata:
-    name: nginx-service
-  spec:
-    selector:
+## example
+```yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
       name: nginx
-    ports:
-      - port: 80
-        targetPort: 80
+  template:
+    metadata:
+      name: nginx
+      labels:
+        name: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+          ports:
+            - containerPort: 80
 
-  ---
+---
 
-  apiVersion: networking.k8s.io/v1
-  kind: Ingress
-  metadata:
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    name: nginx
+  ports:
+    - port: 80
+      targetPort: 80
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  labels:
     name: nginx-ingress
-    labels:
-      name: nginx-ingress
-  spec:
-    ingressClassName: nginx
-    rules:
-      - host: nginx.aria.local
-        http:
-          paths:
-            - path: /
-              pathType: Prefix
-              backend:
-                  service:
-                    name: nginx-service
-                    port:
-                      number: 80
-  ```
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: nginx.aria.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+                service:
+                  name: nginx-service
+                  port:
+                    number: 80
+```
 
 # command
 ## add addons, and check addons
