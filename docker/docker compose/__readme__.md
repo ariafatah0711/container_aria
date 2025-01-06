@@ -51,7 +51,7 @@ docker events --filter 'container=nama' # melihat kejadian secara realtime
 - port => kita bisa mengekspose port di container keluar menggunakan port forwading
   - kita bisa melakukan hal tersebut di konfigurasi file docker compose dengan menggunakan attributes port
     - short syntax => kita bisa gunakan syntax pendek yang berisi string 
-      - ```HOST:CONTAINER``` misal ````8080:80```
+      - ```HOST:CONTAINER``` misal ```8080:80```
     - long syntax => syntax panjang yang bisa kiat buat dalam bentuk object
       ```yaml
       target: <port didalam container>

@@ -26,9 +26,10 @@ services:
 
 - setelah konfigurasi file, container tidak langsung jadi kita harus membuatnya dengan menggunakan docker compose
   - dan jika ingin buat compose kita perlu masuk ke dalam folder nya terlebih dahulu
-  ```bash
-  cd pengenalan
+  
+```bash
+cd pengenalan
 
-  docker-compose create
-  docker compose create
-  ```
+docker-compose create
+docker compose create
+```

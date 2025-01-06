@@ -12,7 +12,7 @@
 - yang perlu diperhatikan adalah ketika menjalankan suatu secara pararel akan mengkonsumsi resource cukup besar di control node
   -  walaupun memang proses jauh lebih cepat
 
-- ansible.cfg
+### ansible.cfg
 ```INI
 [defaults]
 inventory=./inventory/hosts

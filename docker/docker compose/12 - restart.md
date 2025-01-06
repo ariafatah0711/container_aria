@@ -16,7 +16,7 @@ on-failure # restart jika container error dengan indikasi error ketike exit
 unless-stopped # selalu restart container ketika dihentikan manual
 ```
 
-- contoh
+## example
 ```yaml
 version: "3.18"
 
