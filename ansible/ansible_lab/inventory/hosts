@@ -1,5 +1,12 @@
 [node_docker]
 node[1:3]
+node_app
+
+[nginx]
+node[1:3]
+
+[haproxy]
+node_app
 
 [node_docker:vars]
 ansible_user=root

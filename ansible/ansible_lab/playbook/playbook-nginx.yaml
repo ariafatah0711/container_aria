@@ -1,0 +1,123 @@
+---
+- name: Playbook Nginx
+  hosts: nginx
+  become: true
+  gather_facts: true
+  vars:
+    app: nginx
+    path_web: /var/www/html
+    repo: https://github.com/ariafatah0711/linktree
+  tasks:
+    # Update Repository
+    - name: Update Repository
+      block:
+        - name: Update Repository with apt (Debian/Ubuntu)
+          ansible.builtin.apt:
+            update_cache: true
+          tags:
+            - setup
+            - update_repo
+            - install
+        - name: Update Repository with dnf (Fedora)
+          ansible.builtin.dnf:
+            name: "{{ app }}"
+            state: present
+          when: ansible_os_family == "Fedora"
+          tags:
+            - setup
+            - update_repo
+            - install
+
+    # Install Nginx
+    - name: Install Nginx
+      block:
+        - name: Install Nginx with apt (Debian/Ubuntu)
+          ansible.builtin.apt:
+            name: "{{ app }}"
+            state: present
+          when: ansible_os_family == "Debian"
+          tags:
+            - setup
+            - install
+
+        - name: Install Nginx with dnf (Fedora)
+          ansible.builtin.dnf:
+            name: "{{ app }}"
+            state: present
+          when: ansible_os_family == "Fedora"
+          tags:
+            - setup
+            - install
+
+    # website
+    - name: Create Website File
+      block:
+        # create file for web
+        - name: Create file index.html
+          ansible.builtin.copy:
+            content: "{{ inventory_hostname }}"
+            dest: "{{ path_web }}/index.html"
+            mode: "644"
+          tags:
+            - setup
+            - web_test
+            - web_1
+
+        # - name: Create file index html
+        #   ansible.builtin.command:
+        #     cmd: echo "$(whoami)" > "{{ path_web }}/index.html"
+        #   tags:
+        #     - setup
+        #     - web_test
+        #     - web_1
+
+        # - name: Clone the repo github
+        #   ansible.builtin.git:
+        #     repo: "{{ repo }}"
+        #     dest: "{{ path_web }}"
+        #     clone: true
+        #     version: main
+        #     force: true
+        #   tags:
+        #     - setup
+        #     - clone_repo
+        #     - web_2
+
+    # Start and enable nginx
+    - name: Start, restart and enable nginx
+      block:
+        - name: Start, restart and enable nginx with systemd
+          ansible.builtin.service:
+            name: "{{ app }}"
+            state: "{{ item }}"
+            enabled: true
+          loop:
+            - started
+            - restarted
+          tags:
+            - setup
+            - start
+      rescue:
+        - name: Start, restart and enable nginx with upstart
+          ansible.builtin.service:
+            name: "{{ app }}"
+            state: "{{ item }}"
+            enabled: true
+          loop:
+            - started
+            - restarted
+          tags:
+            - setup
+            - start
+      always:
+        - name: Start, restart and enable nginx with sysvinit
+          ansible.builtin.sysvinit:
+            name: "{{ app }}"
+            state: "{{ item }}"
+            enabled: true
+          loop:
+            - started
+            - restarted
+          tags:
+            - setup
+            - start

@@ -563,3 +563,25 @@ ansible-vault edit secret-user.yaml
       when:
         - ansible_os_family == "Debian"
 ```
+
+## try cath finnaly
+```yaml
+  - name: Do complex stuff
+      block:
+         - name: Task 1
+           ansible.builtin.debug:
+             msg: 'execute task 1'
+
+         - name: Task 2
+           ansible.builtin.debug:
+             msg: 'execute task 2'
+
+      rescue:
+         - name: Complex stuf block failed
+           ansible.builtin.debug:
+             msg: 'handle failure'
+      always:
+         - name: Clean up task
+           ansible.builtin.debug:
+             msg: "run always"  
+```

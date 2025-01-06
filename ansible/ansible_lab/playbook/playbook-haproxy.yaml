@@ -1,0 +1,100 @@
+---
+- name: Playbook haproxy
+  hosts: haproxy
+  become: true
+  gather_facts: true
+  vars:
+    app: haproxy
+    path_conf_src: ../conf/haproxy.cfg
+    path_conf_dest: /etc/haproxy/haproxy.cfg
+  # check_mode: false
+  tasks:
+    # Update Repository
+    - name: Update Repository
+      block:
+        - name: Update Repository with apt (Debian/Ubuntu)
+          ansible.builtin.apt:
+            update_cache: true
+          tags:
+            - setup
+            - update_repo
+            - install
+        - name: Update Repository with dnf (Fedora)
+          ansible.builtin.dnf:
+            name: "{{ app }}"
+            state: present
+          when: ansible_os_family == "Fedora"
+          tags:
+            - setup
+            - update_repo
+            - install
+
+    # Install haproxy
+    - name: Install haproxy
+      block:
+        - name: Install haproxy with apt (Debian/Ubuntu)
+          ansible.builtin.apt:
+            name: "{{ app }}"
+            state: present
+          when: ansible_os_family == "Debian"
+          tags:
+            - setup
+            - install
+
+        - name: Install haproxy with dnf (Fedora)
+          ansible.builtin.dnf:
+            name: "{{ app }}"
+            state: present
+          when: ansible_os_family == "Fedora"
+          tags:
+            - setup
+            - install
+
+    # Copy configuration
+    - name: Copy configuration haproxy
+      ansible.builtin.copy:
+        src: "{{ path_conf_src }}"
+        dest: "{{ path_conf_dest }}"
+        mode: "644"
+      tags:
+        - setup
+        - copy
+
+    # Start and enable haproxy
+    - name: Start, restart and enable haproxy
+      block:
+        - name: Start, restart and enable haproxy with systemd
+          ansible.builtin.service:
+            name: "{{ app }}"
+            state: "{{ item }}"
+            enabled: true
+          loop:
+            - started
+            - restarted
+          tags:
+            - setup
+            - start
+      rescue:
+        - name: Start, restart and enable haproxy with upstart
+          ansible.builtin.service:
+            name: "{{ app }}"
+            state: "{{ item }}"
+            enabled: true
+          loop:
+            - started
+            - restarted
+          tags:
+            - setup
+            - start
+      always:
+        - name: Start, restart and enable haproxy with sysvinit
+          ansible.builtin.sysvinit:
+            name: "{{ app }}"
+            state: "{{ item }}"
+            enabled: true
+          loop:
+            - started
+            - restarted
+          tags:
+            - setup
+            - start

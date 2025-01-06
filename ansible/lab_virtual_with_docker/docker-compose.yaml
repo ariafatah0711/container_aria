@@ -38,6 +38,19 @@ services:
       - "10380:80"
     tty: true
     stdin_open: true
+  
+  node_app:
+    build:
+      context: ./node
+    container_name: node_app
+    hostname: node_app
+    networks:
+      - ansible_net
+    ports:
+      - "1022:22"
+      - "1080:80"
+    tty: true
+    stdin_open: true
 
   ansible:
     build:
