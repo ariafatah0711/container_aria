@@ -33,6 +33,11 @@ ansible [pattern] -m [module] -a "[module options]"
 ansible-playbook <playbook.yaml>
 ansible-playbook <playbook.yaml> --check # only check the module not execute
 ansible-playbook <playbook.yaml> --ask-vault-pass # with vault file encrypt
+
+# install module network mikrotik
+ansible-galaxy collection install community.routeros
+pip install paramiko
+ansible-galaxy collection install community.routeros ansible.netcommon ansible.utils
 ```
 
 ## inventory

@@ -1,0 +1,31 @@
+- hosts: rb1
+  connection: network_cli
+  gather_facts: True
+  tasks:
+    - name: Run command on remote devices
+      community.routeros.command:
+        commands: /system routerboard print
+        timeout: 60
+        retries: 10  # Coba ulang 10 kali
+        interval: 5  # Jeda antara percobaan 5 detik
+        match: all  # Menunggu semua kondisi dalam wait_for terpenuhi
+
+    # - name: Run command and check to see if output contains routeros
+    #   community.routeros.command:
+    #     commands: /system resource print
+    #     wait_for: result[0] contains MikroTik
+
+    # - name: Run multiple commands on remote nodes
+    #   community.routeros.command:
+    #     commands:
+    #       - /system routerboard print
+    #       - /system identity print
+
+    # - name: Run multiple commands and evaluate the output
+    #   community.routeros.command:
+    #     commands:
+    #       - /system routerboard print
+    #       - /interface ethernet print
+    #     wait_for:
+    #       - result[0] contains x86
+    #       - result[1] contains ether1
