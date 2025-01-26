@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  jenkins-docker:
+    image: docker:dind
+    container_name: jenkins-docker
+    privileged: true
+    environment:
+      - DOCKER_TLS_CERTDIR=/certs
+    volumes:
+      - jenkins-docker-certs:/certs/client
+      - jenkins-data:/var/jenkins_home
+    networks:
+      jenkins:
+        aliases:
+          - docker
+    ports:
+      - "2376:2376"
+      - "3000:3000"
+      - "5000:5000"
+    restart: always
+    command: ["--storage-driver", "overlay2"]
+
+  jenkins-blueocean:
+    container_name: jenkins-blueocean
+    image: myjenkins-blueocean:2.426.2-1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DOCKER_HOST=tcp://docker:2376
+      - DOCKER_CERT_PATH=/certs/client
+      - DOCKER_TLS_VERIFY=1
+      - JAVA_OPTS=-Dhudson.plugins.git.GitSCM.ALLOW_LOCAL_CHECKOUT=true
+    volumes:
+      - jenkins-data:/var/jenkins_home
+      - jenkins-docker-certs:/certs/client:ro
+      - "${HOME}:/home"
+    networks:
+      - jenkins
+    ports:
+      - "8000:8080"
+      - "50000:50000"
+    restart: on-failure
+
+volumes:
+  jenkins-docker-certs:
+  jenkins-data:
+
+networks:
+  jenkins:
