@@ -1,0 +1,71 @@
+version: "3.9"
+
+services:
+  swarm-manager:
+    image: docker:dind
+    container_name: swarm-manager
+    privileged: true
+    hostname: swarm-manager
+    environment:
+      - DOCKER_TLS_CERTDIR=/certs
+    volumes:
+      - swarm-manager-data:/var/lib/docker
+    ports:
+      - "2377:2377"   # Swarm manager
+      - "2376:2376"   # Docker API
+      - "7946:7946"   # Node communication
+      - "7946:7946/udp"
+      - "4789:4789/udp"
+    command: ["--storage-driver", "overlay2"]
+    networks:
+      swarm-net:
+        aliases:
+          - manager
+    init: true
+
+  swarm-worker1:
+    image: docker:dind
+    container_name: swarm-worker1
+    privileged: true
+    hostname: swarm-worker1
+    environment:
+      - DOCKER_TLS_CERTDIR=/certs
+    volumes:
+      - swarm-worker1-data:/var/lib/docker
+      # - ./entrypoint.sh:/entrypoint.sh
+    # command: ["/bin/sh", "/entrypoint.sh"]
+    networks:
+      swarm-net:
+        aliases:
+          - worker1
+    depends_on:
+      - swarm-manager
+    init: true
+
+  swarm-worker2:
+    image: docker:dind
+    container_name: swarm-worker2
+    privileged: true
+    hostname: swarm-worker2
+    environment:
+      - DOCKER_TLS_CERTDIR=/certs
+    volumes:
+      - swarm-worker2-data:/var/lib/docker
+      # - ./entrypoint.sh:/entrypoint.sh
+    # command: ["/bin/sh", "/entrypoint.sh"]
+    networks:
+      swarm-net:
+        aliases:
+          - worker2
+    depends_on:
+      - swarm-manager
+    init: true
+
+volumes:
+  swarm-manager-data:
+  swarm-worker1-data:
+  swarm-worker2-data:
+
+networks:
+  swarm-net:
+    driver: bridge
