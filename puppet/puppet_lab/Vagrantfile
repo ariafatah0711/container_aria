@@ -1,0 +1,55 @@
+Vagrant.configure("2") do |config|
+  # Puppet Master
+  config.vm.define "puppetserver" do |puppetserver|
+    puppetserver.vm.box = "bento/ubuntu-20.04"
+    puppetserver.vm.hostname = "puppetserver"
+    puppetserver.vm.network "private_network", ip: "192.168.56.10"
+    puppetserver.vm.provider "virtualbox" do |vb|
+      vb.gui = false
+      vb.memory = "3100"
+      vb.cpus = 2
+    end
+    puppetserver.vm.provision "shell", inline: <<-SHELL
+      apt update
+      apt install -y wget gnupg
+      wget https://apt.puppet.com/puppet8-release-focal.deb
+      dpkg -i puppet8-release-focal.deb
+      apt update
+      apt install -y puppetserver
+      systemctl enable puppetserver
+      systemctl start puppetserver
+    SHELL
+  end
+
+  # Puppet Agent
+  config.vm.define "puppetagent" do |puppetagent|
+    puppetagent.vm.box = "bento/ubuntu-20.04"
+    puppetagent.vm.hostname = "puppetagent"
+    puppetagent.vm.network "private_network", ip: "192.168.56.11"
+    puppetagent.vm.provider "virtualbox" do |vb|
+      vb.gui = false
+      vb.memory = "3100"
+      vb.cpus = 2
+    end
+    puppetagent.vm.provision "shell", inline: <<-SHELL
+      apt update
+      apt install -y wget gnupg
+      wget https://apt.puppet.com/puppet8-release-focal.deb
+      dpkg -i puppet8-release-focal.deb
+      apt update
+      apt install -y puppet-agent git
+
+      # # Tambahkan konfigurasi Puppet
+      # cat << EOF > /etc/puppetlabs/puppet/puppet.conf
+      # [main]
+      # server = puppetserver
+      # certname = puppetagent
+      # environment = production
+      # runinterval = 1h"
+      # EOF
+
+      # # Start agent
+      # /opt/puppetlabs/bin/puppet resource service puppet ensure=running enable=true
+    SHELL
+  end
+end
