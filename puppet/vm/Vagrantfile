@@ -1,11 +1,11 @@
 Vagrant.configure("2") do |config|
   # Puppet Master
-  config.vm.define "puppetserver" do |puppetserver|
+  config.vm.define "puppet-server" do |puppetserver|
     puppetserver.vm.box = "bento/ubuntu-20.04"
     puppetserver.vm.hostname = "puppetserver"
     puppetserver.vm.network "private_network", ip: "192.168.56.10"
     puppetserver.vm.provider "virtualbox" do |vb|
-      vb.name = "puppet_server"
+      vb.name = "puppet"
       vb.gui = false
       vb.memory = "3100"
       vb.cpus = 2
@@ -23,12 +23,12 @@ Vagrant.configure("2") do |config|
   end
 
   # Puppet Agent
-  config.vm.define "puppetagent" do |puppetagent|
+  config.vm.define "puppet-client" do |puppetagent|
     puppetagent.vm.box = "bento/ubuntu-20.04"
     puppetagent.vm.hostname = "puppetagent"
     puppetagent.vm.network "private_network", ip: "192.168.56.11"
     puppetagent.vm.provider "virtualbox" do |vb|
-      vb.name = "puppet-client"
+      vb.name = "client"
       vb.gui = false
       vb.memory = "3100"
       vb.cpus = 2
