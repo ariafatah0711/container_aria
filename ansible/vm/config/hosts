@@ -1,0 +1,15 @@
+[clients]
+# client1 ansible_host=192.168.56.11 ansible_user=vagrant ansible_ssh_private_key_file=/vagrant/.vagrant/machines/client1/virtualbox/private_key
+# client2 ansible_host=192.168.56.12 ansible_user=vagrant ansible_ssh_private_key_file=/vagrant/.vagrant/machines/client2/virtualbox/private_key
+client1 ansible_host=192.168.56.11 ansible_user=vagrant ansible_ssh_private_key_file=~/.ssh/client1.key
+client2 ansible_host=192.168.56.12 ansible_user=vagrant ansible_ssh_private_key_file=~/.ssh/client2.key
+
+# [clients]
+# client1 ansible_host=192.168.56.11
+# client2 ansible_host=192.168.56.12
+
+# [clients:vars]
+# ansible_user=vagrant
+# ansible_password=vagrant
+# ansible_port=22
+# ansible_ssh_common_args='-o StrictHostKeyChecking=no'

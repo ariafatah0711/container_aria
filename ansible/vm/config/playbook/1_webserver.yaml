@@ -1,0 +1,23 @@
+---
+- name: Playbook setup web server
+  hosts: clients
+  become: yes # wajib dinyalain jika gunaian become_method
+  become_method: sudo
+  tasks:
+    - name: Update repository
+      ansible.builtin.apt:
+        update_cache: true
+    - name: Install nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: latest
+    - name: Copy file html
+      ansible.builtin.copy:
+        src: ./web/
+        dest: /var/www/html
+    - name: Start ngix
+      # ansible.builtin.sysvinit:
+      ansible.builtin.systemd:
+      # ansible.builtin.service:
+        name: nginx
+        state: started

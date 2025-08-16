@@ -1,0 +1,56 @@
+Vagrant.configure("2") do |config|
+  # Box minimal biar ringan
+  config.vm.box = "debian/bookworm64"
+
+  # sync folder
+  config.vm.synced_folder ".", "/home/vagrant/data", disabled: false
+  # config.vm.synced_folder "../", "/home/vagrant/data"
+
+  # Ansible Control Node
+  config.vm.define "ansible" do |ansible|
+    ansible.vm.hostname = "ansible"
+    ansible.vm.network "private_network", ip: "192.168.56.10"
+    ansible.vm.provider "virtualbox" do |vb|
+      vb.name = "ansible-control"
+      vb.memory = 512
+      vb.cpus = 1
+    end
+
+    # Provision otomatis install ansible
+    ansible.vm.provision "shell", inline: <<-SHELL
+      apt-get update -y
+      apt-get install -y ansible sshpass python3
+    SHELL
+
+    # Provision yang dijalankan SETIAP boot
+    ansible.vm.provision "shell", run: "always", inline: <<-SHELL
+      mkdir -p /home/vagrant/.ssh
+      cp /home/vagrant/data/.vagrant/machines/client1/virtualbox/private_key /home/vagrant/.ssh/client1.key
+      cp /home/vagrant/data/.vagrant/machines/client2/virtualbox/private_key /home/vagrant/.ssh/client2.key
+      chown vagrant:vagrant /home/vagrant/.ssh/client*.key
+      chmod 600 /home/vagrant/.ssh/client*.key
+    SHELL
+  end
+
+  # Client 1
+  config.vm.define "client1" do |client|
+    client.vm.hostname = "client1"
+    client.vm.network "private_network", ip: "192.168.56.11"
+    client.vm.provider "virtualbox" do |vb|
+      vb.name = "ansible-client1"
+      vb.memory = 512
+      vb.cpus = 1
+    end
+  end
+
+  # Client 2
+  config.vm.define "client2" do |client|
+    client.vm.hostname = "client2"
+    client.vm.network "private_network", ip: "192.168.56.12"
+    client.vm.provider "virtualbox" do |vb|
+      vb.name = "ansible-client2"
+      vb.memory = 512
+      vb.cpus = 1
+    end
+  end
+end
